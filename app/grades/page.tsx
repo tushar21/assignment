@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import {
     Box,
@@ -45,7 +44,7 @@ const Page = () => {
     const fetchGrades = async (type: string) => {
         try {
             const res = await fetch(`${BASE_URL}api/grades?filter=${type}`);
-            const data = await res.json();
+            const data = await res?.json();
             setGrades(data);
             setFilter(type);
         } catch (err) {
@@ -54,14 +53,10 @@ const Page = () => {
     };
 
     const handleSubmit = async () => {
-
-
         setError("");
         setSuccess("");
-
         const numericGrade = Number(newGrade);
-
-        if (!newClass || !classOptions.includes(newClass)) {
+        if (!newClass || !classOptions?.includes(newClass)) {
             setError("Please select a valid class.");
             return;
         }
@@ -78,7 +73,7 @@ const Page = () => {
                 body: JSON.stringify({ sub: newClass, grade: numericGrade }),
             });
 
-            if (!res.ok) throw new Error("Failed to add grade");
+            if (!res?.ok) throw new Error("Failed to add grade");
 
             setSuccess("Grade added successfully.");
             setNewClass("");
@@ -129,9 +124,7 @@ const Page = () => {
                             onChange={(e) => setNewGrade(e.target.value)}
                             inputProps={{ min: 0, max: 100 }}
                             sx={{ width: 250 }}
-                            error={!!error && (newGrade.trim() === "" || isNaN(Number(newGrade)) || Number(newGrade) < 0 || Number(newGrade) > 100)}
-
-                        />
+                            error={!!error && (newGrade.trim() === "" || isNaN(Number(newGrade)) || Number(newGrade) < 0 || Number(newGrade) > 100)} />
 
 
                         <Button variant="contained" onClick={handleSubmit}>
@@ -174,9 +167,9 @@ const Page = () => {
                         <TableBody>
                             {grades.map((row, idx) => (
                                 <TableRow key={idx}>
-                                    {filter === "all" && <TableCell>{row.id}</TableCell>}
-                                    <TableCell>{row.class}</TableCell>
-                                    <TableCell>{row.grade}</TableCell>
+                                    {filter === "all" && <TableCell>{row?.id}</TableCell>}
+                                    <TableCell>{row?.class}</TableCell>
+                                    <TableCell>{row?.grade}</TableCell>
                                 </TableRow>
                             ))}
                             {grades.length === 0 && (

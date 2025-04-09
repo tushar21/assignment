@@ -15,26 +15,20 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-// interface Props {
-//     window?: () => Window;
-// }
-
 const drawerWidth = 240;
 
 const navItems = [
-    // { label: 'Home', path: '/' },
     { label: 'Numbers', path: '/numbers' },
     { label: 'Grades', path: '/grades' },
 ];
 
 const Navbar = () => {
-    // const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const router = useRouter();
     const pathname = usePathname();
 
     const handleDrawerToggle = () => {
-        setMobileOpen((prevState) => !prevState);
+        setMobileOpen((prevState: any) => !prevState);
     };
 
     const handleNavigation = (path: string) => {
@@ -70,7 +64,6 @@ const Navbar = () => {
         </Box>
     );
 
-    // const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
         <>
@@ -115,7 +108,6 @@ const Navbar = () => {
             </AppBar>
             <nav>
                 <Drawer
-                    // container={container}
                     variant="temporary"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
